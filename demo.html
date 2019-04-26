@@ -1,0 +1,62 @@
+<!-- <!DOCTYPE html>
+
+<html>
+
+<head>
+    <style type="text/css">
+        #div1 {
+            width: 700px;
+            height: 120px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+        #drag1 {
+            cursor:pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        function allowDrop(ev)  {
+            ev.preventDefault();
+        }
+        function drag(ev)  {
+            ev.dataTransfer.setData("Text", ev.target.id);
+
+        }
+        function drop(ev)  {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            var item = document.getElementById(data).cloneNode();
+            ev.target.appendChild(item);
+        }
+    </script>
+</head>
+<body>
+    <p>请把 Windows Azure 的图片拖放到矩形中：</p>
+    <div id="div1"  ondrop="drop(event)"  ondragover="allowDrop(event)"></div>
+    <br/>
+    <img id="drag1"  src="http://www.cnblogs.com/images/cnblogs_com/toutou/699740/t_Azure.png"  draggable="true"  ondragstart="drag(event)"/>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="box">hello nodeType~</div>
+
+<script type="text/javascript">
+	var element = document.getElementById("box");
+	var attr = document.getElementById("box").getAttributeNode("id");
+	var text = document.getElementById("box").firstChild;
+
+	console.log(element.nodeType);     //1
+	console.log(attr.nodeType);        //2
+	console.log(text.nodeType);        //3
+</script>
+</body>
+</html>
