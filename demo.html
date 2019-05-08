@@ -39,7 +39,7 @@
 </body>
 </html> -->
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,5 +58,137 @@
 	console.log(attr.nodeType);        //2
 	console.log(text.nodeType);        //3
 </script>
+</body>
+</html> -->
+<!-- <link rel="stylesheet" type="css/jquery-ui-1.9.2.custom.min.css"> 
+<script language="javascript" src="js/jquery-1.8.3.js"></script> 
+<script language="javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script> 
+<style type="text/css"> 
+#aaa { 
+position: fixed; 
+background-color: blue; 
+height: 150px; 
+width: 150px; 
+} 
+
+#bbb { 
+position: fixed; 
+background-color: green; 
+height: 150px; 
+width: 150px; 
+top: 200px; 
+left: 400px; 
+} 
+
+#mm,#nn { 
+position: absolute; 
+display: none; 
+} 
+</style> 
+<script type="text/javascript"> 
+$(function() { 
+var hh = $(document).height(); //获取页面容器的高度； 
+//alert(hh); 
+$('#aaa').draggable( { 
+drag : function(event, ui) { 
+var x = ui.offset.left; 
+var y = ui.offset.top; 
+$('#mm').css("top", y); 
+$('#nn').css("height", hh); 
+$('#nn').css("left", x); 
+$('#mm').css("display", "block"); 
+$('#nn').css("display", "block"); 
+}, 
+
+stop : function(event, ui) { 
+$('#mm').css("display", "none"); 
+$('#nn').css("display", "none"); 
+} 
+
+}) 
+
+}) 
+</script> 
+</head> 
+
+<body> 
+<div id="mm" 
+style="border-color: red; border-bottom-style: dashed; width: 100%;  border-bottom-width: 1px;"></div> 
+<div id="nn" 
+style="border-color: red; border-left-style: dashed; width; 1 px; border-left-width: 1px;"></div> 
+<div id="aaa"> 
+
+Drag me around 
+
+
+</div> 
+      
+<div id="bbb"> 
+
+align me around 
+
+
+</div> 
+</body> 
+</html> -->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="./static/blockly_compressed.js"></script>
+    <script src="./static/blocks_compressed.js"></script>
+    <script src="./static/javascript_compressed.js"></script>
+    <script src="./static/msg/js/zh-hans.js"></script>
+</head>
+<body>
+<!-- <div ondragover="allowDrop(event)" id="div1" ondrop="drop(event)">
+<img src="./eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" id="drag1"/>
+</div>
+
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+</div> -->
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+<div id="codeBox" style="height: 80px; width: 600px;border: 1px #eeeeee solid;margin: 10px 0"></div>
+<button onclick="toShowJs()">toShowJs</button>
+<button onclick="toRunJs()">toRunJs</button>
+<xml id="toolbox" style="display: none">
+    <block type="hello"></block>
+</xml>
+<script>
+    Blockly.Blocks['hello'] = {
+        init: function() {
+            this.appendDummyInput()
+            .appendField("输出")
+            .appendField(new Blockly.FieldTextInput("hello world"), "say_content");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, null);
+            this.setNextStatement(true, null);
+            this.setColour(230);
+            this.setTooltip("");
+            this.setHelpUrl("");
+        }
+    };
+    Blockly.JavaScript['hello'] = function (block) {
+        var text_say_content = block.getFieldValue('say_content');
+        // TODO: Assemble JavaScript into code variable.
+        var code = `console.log('${text_say_content}')`;
+        return code;
+    };
+    this.demoWorkspace = Blockly.inject('blocklyDiv',  {toolbox: document.getElementById('toolbox')});
+    var toShowJs = function () {
+        this.latestCode = Blockly.JavaScript.workspaceToCode(this.demoWorkspace);
+        document.getElementById('codeBox').innerHTML = this.latestCode
+    };
+    var toRunJs = function () {
+        try {
+            eval(this.latestCode)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    </script>
 </body>
 </html>

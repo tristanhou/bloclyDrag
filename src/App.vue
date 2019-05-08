@@ -8,7 +8,7 @@
   </div>
   <div style="background: url(./static/image/750_1334_dev.png) center center no-repeat; height: 702px; min-width: 410px; position: relative">
     <div style="background-color: white; height: 534px; width: 302px;position:absolute;left:55px;top:84px;z-index:9999">
-		<draggable group="people" style="height:100px; width:100%; overflow:auto" :list="buttonList" @clone="cloneButton">
+		<draggable group="people" style="height:100%; width:100%; overflow:auto" :list="buttonList" @clone="cloneButton">
 			<div v-for="(item, index) in buttonList" :key="index" style="margin:10px">
 				<van-button type="info" size="large">{{item.name}} {{item.key}}</van-button>
 				<van-field placeholder="请输入"  v-if="item.index"/>
@@ -22,12 +22,12 @@
     </div>
   </div>
   <div style="background：red; height: 702px;width: 210px; border: 1px solid #eee; padding: 10px 10px;">
-      <draggable  @clone="cloneLabel" :group="{ name: 'person', pull: 'clone', put: false }" :list="button">
-		  <van-field placeholder="请输入" style="height:40px" />
-      </draggable>
-      <draggable   :group="{ name: 'people', pull: 'clone', put: false }" :style="{marginTop: 10 + 'px'}" :list="button">
-		  <van-button type="info" size="large">按钮</van-button>
-      </draggable>
+		<!-- <draggable  @clone="cloneLabel" :group="{ name: 'person', pull: 'clone', put: false }" :list="button">
+			<van-field placeholder="请输入" style="height:40px" />
+		</draggable> -->
+		<draggable :group="{ name: 'people',  pull: 'clone', put: false }" :style="{marginTop: 10 + 'px'}" :list="button">
+			<van-button type="info" size="large">按钮</van-button>
+		</draggable>
   </div>
   <toolbox></toolbox>
 </div>
@@ -56,7 +56,8 @@
             msg: 'johnhuu',
             demoWorkspace: null,
             latestCode: null,
-            idGlobal: 0
+            idGlobal: 0,
+            text: 'hello world'
         }
     },
     components: {
@@ -77,14 +78,14 @@
               this.setHelpUrl("");
             }
           };
-          Blockly.JavaScript['say'] = function(block) {
-          var text_say_content = block.getFieldValue('say_content');
-          // TODO: Assemble JavaScript into code variable.
-        debugger
-          var code = `this.buttonList.push({name:'johnhuu', id:123})`;
-          return code;
-        };
-       this.demoWorkspace = Blockly.inject('blocklyDiv',  {media: './static/media/', toolbox: document.getElementById('toolbox')});
+Blockly.JavaScript['say'] = function(block) {
+    var text_say_content = block.getFieldValue('say_content').toString();
+    // TODO: Assemble JavaScript into code variable.
+    var code = `console.log(this.text)`;
+    // var code = `this.buttonList.push({name:'johnhuu', id:123})`;
+    return code;
+};
+          this.demoWorkspace = Blockly.inject('blocklyDiv',  {media: './static/media/', toolbox: document.getElementById('toolbox')});
     },
     methods: {
       toShowJs () {
@@ -94,7 +95,7 @@
           // document.getElementById('codeBox').innerHTML = this.latestCode
       },
       onStart () {
-debugger
+        debugger
       },
       onAdd (e,l) {
         debugger
@@ -123,6 +124,7 @@ debugger
 	  },
       toRunJs () {
         try {
+          debugger
           eval(this.latestCode)
         }
         catch (e) {
