@@ -78,13 +78,13 @@
               this.setHelpUrl("");
             }
           };
-Blockly.JavaScript['say'] = function(block) {
-    var text_say_content = block.getFieldValue('say_content').toString();
-    // TODO: Assemble JavaScript into code variable.
-    var code = `console.log(this.text)`;
-    // var code = `this.buttonList.push({name:'johnhuu', id:123})`;
-    return code;
-};
+          Blockly.JavaScript['say'] = function(block) {
+              var text_say_content = block.getFieldValue('say_content').toString();
+              // TODO: Assemble JavaScript into code variable.
+            //   var code = `console.log(this.text)`;
+              var code = `this.buttonList.push({name:'johnhuu', id:123})`;
+              return code;
+          };
           this.demoWorkspace = Blockly.inject('blocklyDiv',  {media: './static/media/', toolbox: document.getElementById('toolbox')});
     },
     methods: {
