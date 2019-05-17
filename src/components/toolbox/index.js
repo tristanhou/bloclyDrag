@@ -11,6 +11,8 @@ export default {
         <block type="text"></block>
         <block type="text_print"></block>
         <block type="say"></block>
+        <block type="string_length"></block>
+        <block type="block_type"></block>
       </xml>
     }
   }
