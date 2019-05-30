@@ -5,31 +5,41 @@
 		<div><button @click="toShowJs">show code</button><button @click="toRunJs">run code</button></div>
 		<div></div>
 		<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-		<div id="codeBox"  style="height: 480px; width: 600px;" @drop="drop($event)" @dragover="allowDrop($event)">
+		<div id="codeBox"  style="height: 480px; width: 600px;" >
 			x: <input type="text" name="firstname" :value="top">
 			y: <input type="text" name="firstname" :value="left">
 		</div>
 	</div>
-	<div style="background: url(./static/image/750_1334_dev.png) center center no-repeat; height: 702px; min-width: 410px; position: relative">
+	<div class="parents-box" >
 		<div style=" height: 534px; width: 302px;position:absolute;left:55px;top:84px;z-index:9999" >
-		<!-- <draggable group="people" style="height:100%; width:100%; overflow:auto" :list="buttonList" @clone="cloneButton"> -->
-			<div v-for="(item, index) in buttonList" :key="index">
-				<van-button type="info" size="middle" v-draggable="item.options"  :class="item.class" @kill="kill">{{item.name}} {{item.key}}</van-button>
-			</div>
+			<template v-for="(item, index) in dataList" >
+				<!-- <van-button type="info" size="middle" v-draggable="item.options"  :class="item.class" style="position:absolute" :key="index">{{item.name}} {{item.key}}</van-button> -->
+				<div :class="item.class" style="max-width:100%; max-height:170px;position:absolute;overflow:hidden" :key="index" v-draggable="item.options" :id="item.id">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg" style="width:100%; height:100%;overflow:hidden"/>
+				</div>
+				
+			</template>
 		</div>
 	</div>
-	<div style="height: 702px;width: 210px; border: 1px solid #eee; padding: 10px 10px;">
-	 <van-button type="info" size="large" draggable="true"  id="dargable" v-on:dragstart.native="drag">按钮2</van-button>
-			<!-- <buttonBox/> -->
+	<div style="height: 702px;width: 210px; border: 1px solid #eee; padding: 10px 10px;" >
+		<van-button type="info" size="large"    draggable="true" v-on:dragstart.native="drag($event)" id='draggable' style="">按钮</van-button>
+			<buttonBox/>
 	</div>
 	<toolBox></toolBox>
 </div>
 </template>
-
 <!--样式描述-->
 <style scoped>
 	h1 {
 		color: red;
+	}
+	.parents-box {
+		background: url(../public/image/750_1334_dev.png) center center no-repeat;;
+		position: relative;
+		height: 702px; 
+		min-width: 410px;
+		
+		/* background: url('./static/image/750_1334_dev.png') center center no-repeat;   */
 	}
 </style>
 
@@ -42,11 +52,20 @@
 	export default {
 		data() {
 			return {
-				buttonList: [{ name: "cat 5", id: 5, key: 'index', class: 'cat5', options: {
+				dataList: [{ name: "cat 5", id: 'cat5', key: 'index', class: 'cat5', options: {
 					trigger: '.cat5',
 					body: '.cat5',
 					recover: true
+				}},{ name: "cat 6", id: 'cat6', key: 'indexlist', class: 'cat6', options: {
+					trigger: '.cat6',
+					body: '.cat6',
+					recover: true
 				}}],
+				options: {
+					trigger: '.cat5',
+					body: '.cat5',
+					recover: true
+				},
 				label: [{ name: "cat 5", id: 5, key: 'home' }],
 				labelList: [],
 				item: ['http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg'],
@@ -122,21 +141,20 @@
 						debugger
 				return [argument0 + '.length', Blockly.JavaScript.ORDER_ATOMIC];
 			};
-			this.demoWorkspace = Blockly.inject('blocklyDiv',  {media: './static/media/', toolbox: document.getElementById('toolbox')});
+			this.demoWorkspace = Blockly.inject('blocklyDiv',  {media: '/public/media/', toolbox: document.getElementById('toolbox')});
 		},
 		methods: {
 			kill () {
 				debugger
 			},
 			toShowJs () {
-					debugger
-					console.log(Blockly.WorkspaceSvg)
-					this.latestCode = Blockly.JavaScript.workspaceToCode(this.demoWorkspace);
-					document.getElementById('codeBox').innerHTML = this.latestCode
+				debugger
+				console.log(Blockly.WorkspaceSvg)
+				this.latestCode = Blockly.JavaScript.workspaceToCode(this.demoWorkspace);
+				document.getElementById('codeBox').innerHTML = this.latestCode
 			},
 			drop (evt) {
 				evt.preventDefault();
-				debugger
 				let type = evt.dataTransfer.getData("Text")
 				switch (type) {
 					case 'button':
@@ -145,7 +163,7 @@
 						trigger: '.cat6',
 						body: '.cat6',
 						recover: true
-				}})
+					}})
 				}
 				let v = evt.dataTransfer.getData("button")
 			
@@ -154,7 +172,8 @@
 				debugger
 			},
 			drag (evt) {
-				evt.dataTransfer.setData('Text', 'button');
+			
+				evt.dataTransfer.setData('Text', evt.target.id);
 			},
 			allowDrop (e) {
 				e.preventDefault();
@@ -167,13 +186,13 @@
 			},
 			cloneButton (eee) {
 			debugger
-		// let id = getUniqueId()
-		 return {
+			// let id = getUniqueId()
+		 	return {
 				id: 3,
 				name: `cat 1`
 			}
-				// this.buttonList.push({
-		// 	uniqueId: getUniqueId(),
+			// this.buttonList.push({
+			// 	uniqueId: getUniqueId(),
 				//   	id: id,
 				//   	name: `button ${id}`
 				// })
