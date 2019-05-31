@@ -1,20 +1,21 @@
 <!--渲染模版-->
 <template>
-<div style="display: flex; align-items:center">
+<div style="display: flex; -webkit-align-items: center;justify-content:center;height:100vh">
 	<div>
-		<div><button @click="toShowJs">show code</button><button @click="toRunJs">run code</button></div>
-		<div></div>
+		<div><button @click="toShowJs">show code</button><button @click="toRunJs" style="margin-left:10px">run code</button></div>
+		<br>
 		<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-		<div id="codeBox"  style="height: 480px; width: 600px;" >
-			x: <input type="text" name="firstname" :value="top">
-			y: <input type="text" name="firstname" :value="left">
+		<br>
+		<div><van-button type="info" size="large" ref="btn">按钮</van-button></div>
+		<div id="codeBox"  style="height: 280px; width: 600px;" >
 		</div>
 	</div>
-	<div class="parents-box" >
+	<br>
+	<!-- <div class="parents-box" >
 		<div style=" height: 534px; width: 302px;position:absolute;left:55px;top:84px;z-index:9999" >
-			<template v-for="(item, index) in dataList" >
+			<template v-for="(item, index) in dataList" > -->
 				<!-- <van-button type="info" size="middle" v-draggable="item.options"  :class="item.class" style="position:absolute" :key="index">{{item.name}} {{item.key}}</van-button> -->
-				<div :class="item.class" style="max-width:100%; max-height:170px;position:absolute;overflow:hidden" :key="index" v-draggable="item.options" :id="item.id">
+				<!-- <div :class="item.class" style="max-width:100%; max-height:170px;position:absolute;overflow:hidden" :key="index" v-draggable="item.options" :id="item.id">
 					<img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg" style="width:100%; height:100%;overflow:hidden"/>
 				</div>
 				
@@ -24,7 +25,7 @@
 	<div style="height: 702px;width: 210px; border: 1px solid #eee; padding: 10px 10px;" >
 		<van-button type="info" size="large"    draggable="true" v-on:dragstart.native="drag($event)" id='draggable' style="">按钮</van-button>
 			<buttonBox/>
-	</div>
+	</div> -->
 	<toolBox></toolBox>
 </div>
 </template>
@@ -34,7 +35,7 @@
 		color: red;
 	}
 	.parents-box {
-		background: url(../public/image/750_1334_dev.png) center center no-repeat;;
+		background: url(../public/image/750_1334_dev.png) center center no-repeat;
 		position: relative;
 		height: 702px; 
 		min-width: 410px;
@@ -121,6 +122,7 @@
 					// TODO: Assemble JavaScript into code variable.
 					// var code = `console.log(this.text)`;
 					var code = `this.buttonList.push({name:'johnhuu', id:123})`;
+					var code = `this.$refs['btn'].addEventListener('click', alert(1))`;
 					return code;
 			};
 			Blockly.Blocks['string_length'] = {
@@ -141,7 +143,7 @@
 						debugger
 				return [argument0 + '.length', Blockly.JavaScript.ORDER_ATOMIC];
 			};
-			this.demoWorkspace = Blockly.inject('blocklyDiv',  {media: '/public/media/', toolbox: document.getElementById('toolbox')});
+			this.demoWorkspace = Blockly.inject('blocklyDiv',  {media:'../public/media/', toolbox: document.getElementById('toolbox')});
 		},
 		methods: {
 			kill () {
