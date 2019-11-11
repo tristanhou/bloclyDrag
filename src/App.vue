@@ -11,31 +11,31 @@
 		</div>
 	</div>
 	<br>
-	<!-- <div class="parents-box" >
+	<div class="parents-box" >
 		<div style=" height: 534px; width: 302px;position:absolute;left:55px;top:84px;z-index:9999" >
-			<template v-for="(item, index) in dataList" > -->
-				<!-- <van-button type="info" size="middle" v-draggable="item.options"  :class="item.class" style="position:absolute" :key="index">{{item.name}} {{item.key}}</van-button> -->
-				<!-- <div :class="item.class" style="max-width:100%; max-height:170px;position:absolute;overflow:hidden" :key="index" v-draggable="item.options" :id="item.id">
+			<template v-for="(item, index) in dataList" >
+				<van-button type="info" size="middle" v-draggable="item.options"  :class="item.class" style="position:absolute" :key="index">{{item.name}} {{item.key}}</van-button>
+				<div :class="item.class" style="max-width:100%; max-height:170px;position:absolute;overflow:hidden" :key="index" v-draggable="item.options" :id="item.id">
 					<img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg" style="width:100%; height:100%;overflow:hidden"/>
 				</div>
-				
 			</template>
 		</div>
 	</div>
 	<div style="height: 702px;width: 210px; border: 1px solid #eee; padding: 10px 10px;" >
 		<van-button type="info" size="large"    draggable="true" v-on:dragstart.native="drag($event)" id='draggable' style="">按钮</van-button>
 			<buttonBox/>
-	</div> -->
+	</div>
 	<toolBox></toolBox>
 </div>
 </template>
 <!--样式描述-->
 <style scoped>
+ @import url(~@/public/base.css);
 	h1 {
 		color: red;
 	}
 	.parents-box {
-		background: url(../public/image/750_1334_dev.png) center center no-repeat;
+		background: url(~@/public/image/750_1334_dev.png) center center no-repeat;
 		position: relative;
 		height: 702px; 
 		min-width: 410px;
@@ -122,14 +122,14 @@
 					// TODO: Assemble JavaScript into code variable.
 					// var code = `console.log(this.text)`;
 					var code = `this.buttonList.push({name:'johnhuu', id:123})`;
-					var code = `this.$refs['btn'].addEventListener('click', alert(1))`;
+					var code = `this.$refs['btn'].addEventListener('click', function(){alert(123)})`;
 					return code;
 			};
 			Blockly.Blocks['string_length'] = {
 				init: function() {
 					this.appendValueInput('VALUE')
-							.setCheck('String')
-							.appendField('length of');
+						.setCheck('String')
+						.appendField('length of');
 					this.setOutput(true, 'Number');
 					this.setColour(160);
 					this.setTooltip('Returns number of letters in the provided text.');

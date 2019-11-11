@@ -16,6 +16,7 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0-beta.3",
     "@vue/babel-preset-jsx": "^1.0.0-beta.3",
     "dragula": "^3.7.2",
+    "lodash": "^4.17.15",
     "mint-ui": "^2.2.13",
     "url-loader": "^1.1.2",
     "vue": "^2.6.10",
