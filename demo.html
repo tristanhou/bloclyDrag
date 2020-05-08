@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!-- <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,15 +8,8 @@
     <script src="./static/msg/js/zh-hans.js"></script>
 </head>
 <body>
-<!-- <div ondragover="allowDrop(event)" id="div1" ondrop="drop(event)">
-<img src="./eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" id="drag1"/>
-</div>
-
-<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-
-</div> -->
 <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-<div id="codeBox" style="height: 80px; width: 600px;border: 1px #eeeeee solid;margin: 10px 0"></div>
+<div id="codeBox" class="codeBox" style="height: 80px; width: 600px;border: 1px #eeeeee solid;margin: 10px 0"></div>
 <button onclick="toShowJs()">toShowJs</button>
 <button onclick="toRunJs()">toRunJs</button>
 <xml id="toolbox" style="display: none">
@@ -56,5 +49,55 @@
         }
     }
     </script>
+</body>
+</html> -->
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+    #div1 {width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script type="text/javascript">
+// function allowDrop(ev)
+// {
+// ev.preventDefault();
+// }
+
+// function drag(ev)
+// {
+// ev.dataTransfer.setData("Text",ev.target.id);
+// }
+
+// function drop(ev)
+// {
+// ev.preventDefault();
+// var data=ev.dataTransfer.getData("Text");
+// ev.target.appendChild(document.getElementById(data));
+// }
+function insertSort(list = []) {
+    debugger
+    for(let i = 1 , len = list.length; i < len; i++){
+        let j = i - 1;
+        let temp = list[ i ];
+        while (j >= 0 && list[ j ] > temp){
+            list[j + 1] = list[ j ];
+            j = j - 1;
+        }
+        list[j + 1] = temp;
+    }
+    return list;
+}
+insertSort([5,7,2,4,8,9,1])
+console.log(arr)
+</script>
+</head>
+<body>
+
+<p>请把 W3School 的图片拖放到矩形中：</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br />
+<img id="drag1" src="/i/eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" />
+
 </body>
 </html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+#div1 {width:198px; height:66px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script type="text/javascript">
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text");
+ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+    <!-- <form id="myFormElement" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" value="" multiple="multiple" />
+        <input type="submit" value="提交"/>
+        <div id="myOutput"></div>
+    </form>
+    <a href="javascript:sendForm()">Stash the file!</a>
+<p>请把 W3School 的图片拖放到矩形中：</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br />
+<img id="drag1" src="https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg" draggable="true" ondragstart="drag(event)" />
+<script>
+    function sendForm () {
+        debugger
+        var formElement = document.getElementById("myFormElement");
+        var oOutput = document.getElementById('myOutput')
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "http://39.106.185.13:3000/upload");
+        oReq.send(new FormData(formElement));
+        oReq.onload = function(oEvent) {
+            if (oReq.status == 200) {
+            oOutput.innerHTML = "Uploaded!";
+            } else {
+            oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
+            }
+        }; 
+    }
+
+</script> -->
+
+<h1>发布——订阅模式的通用实现</h1>
+   <p>javaScript作为一门解释执行的语言，给对象添加动态职责是理所当然的。所以我们将发布——订阅的功能提取出来，放在一个单独的对象内：</p>
+   <script>
+       var event = {
+          clientList: {},
+          listen: function( key, fn ){             //添加订阅对象
+              if( !this.clientList[ key ] ){
+                 this.clientList[ key ] = [];
+              }
+              this.clientList[ key ].push( fn );
+          }, 
+          trigger: function(){                     //绑定发布事件
+             var key = Array.prototype.shift.apply( arguments ),
+                 fns = this.clientList[ key ];
+             for( var i = 0, fn; fn = fns[ i++]; ){
+                fn.apply( this, arguments );
+             }
+          },
+          remove: function( key, fn ){
+              debugger           //取消订阅的事件
+             var fns = this.clientList[ key ];
+             
+             if( !fns ){                          //如果key对应的消息没有被人订阅，则直接返回  
+                return false;
+             };
+             if( !fn ){                           //如果没有传入具体的回调函数，标示取消key对应消息的所有订阅 
+                fns = [];
+             }else{
+                for( var i = fns.length - 1; i >= 0 ; i-- ){  //取消key对应的订阅消息
+                    if( fn === fns[ i ] ){
+                       fns.splice( i, 1 );
+                    }
+                }
+             }
+             
+          }
+       };
+       
+       var saleOffices = {};
+       var installEvent = function( obj ){
+          for( i in event ){
+            obj[ i ] = event[ i ];
+          }
+       };
+       
+       installEvent( saleOffices );
+       saleOffices.listen( "squareMeter88", fn1 = function ( price ){
+           console.log( "价格" + price );
+       } );
+       saleOffices.listen( "squareMeter88", function( price ){
+           console.log( "价格" + price );
+       } );
+       saleOffices.remove( "squareMeter88", fn1);
+       saleOffices.trigger( "squareMeter88", 200000 );
+   </script>
+</body>
+</html>

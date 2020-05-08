@@ -2,22 +2,46 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="./static/blockly_compressed.js"></script>
-    <script src="./static/blocks_compressed.js"></script>
-    <script src="./static/javascript_compressed.js"></script>
-    <script src="./static/msg/js/zh-hans.js"></script>
+    <script src="./public/blockly_compressed.js"></script>
+    <script src="./public/blocks_compressed.js"></script>
+    <script src="./public/javascript_compressed.js"></script>
+    <script src="./public/msg/js/zh-hans.js"></script>
 </head>
 <body>
-<!-- <div ondragover="allowDrop(event)" id="div1" ondrop="drop(event)">
-<img src="./eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" id="drag1"/>
-</div>
-
-<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-
-</div> -->
+<!-- <form id="myFormElement" enctype="multipart/form-data">
+    <input type="file" name="file" id="file" value="" multiple="multiple" />
+    <input type="submit" value="提交"/>
+    <div id="myOutput"></div>
+</form>
+<a href="javascript:sendForm()">Stash the file!</a>
+<a href="../docs/doc/"  title="下载"  mce_href="#" id="download">下载</a> -->
 <div id="app">
     
 </div>
-<script src="./dist/main.js"></script>
+<script>
+    function sendForm () {
+        debugger
+        var formElement = document.getElementById("myFormElement");
+        var oOutput = document.getElementById('myOutput')
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "/proxy/upload");
+        oReq.send(new FormData(formElement));
+        oReq.onload = function(oEvent) {
+            if (oReq.status == 200) {
+                debugger
+                oOutput.innerHTML = "Uploaded!";
+                myDownload(oReq.response)
+                const vDom = document.getElementById('download')
+                vDom.setAttribute('href',  oReq.response)
+                console.log(oReq.responseType, oReq.responseURL, oReq.responseText, oReq.response)
+            } else {
+            oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
+            }
+        }; 
+    }
+    function myDownload (path) {
+        window.open('/proxy/download/' + path );
+    }
+</script>
 </body>
 </html>
