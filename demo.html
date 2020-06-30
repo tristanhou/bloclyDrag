@@ -13,7 +13,7 @@
 <button onclick="toShowJs()">toShowJs</button>
 <button onclick="toRunJs()">toRunJs</button>
 <xml id="toolbox" style="display: none">
-    <block type="hello"></block>
+    <block type="hello">this is a block</block>
 </xml>
 <script>
     Blockly.Blocks['hello'] = {
@@ -74,30 +74,69 @@
 // var data=ev.dataTransfer.getData("Text");
 // ev.target.appendChild(document.getElementById(data));
 // }
-function insertSort(list = []) {
-    debugger
-    for(let i = 1 , len = list.length; i < len; i++){
-        let j = i - 1;
-        let temp = list[ i ];
-        while (j >= 0 && list[ j ] > temp){
-            list[j + 1] = list[ j ];
-            j = j - 1;
-        }
-        list[j + 1] = temp;
-    }
-    return list;
-}
-insertSort([5,7,2,4,8,9,1])
-console.log(arr)
-</script>
+// function insertSort(list = []) {
+//     debugger
+//     for(let i = 1 , len = list.length; i < len; i++){
+//         let j = i - 1;
+//         let temp = list[ i ]; // 临时变量，也就是第一个插入的元素
+//         while (j >= 0 && list[ j ] > temp){ // 与他的前一个变量比较，如果临时变量大于前一个元素，则执行交换
+//             list[j + 1] = list[ j ]; 
+//             j = j - 1;
+//         }
+//         list[j + 1] = temp;
+//     }
+//     return list;
+// }
+
+// function shellSort(arr) {
+//     debugger
+//     var len = arr.length,
+//         temp,
+//         gap = 1;
+//     while(gap < len/3) {          //动态定义间隔序列
+//         gap =gap*3+1;
+//     }
+//     for (gap; gap > 0; gap = Math.floor(gap/3)) {
+//         for (var i = gap; i < len; i++) {
+//             temp = arr[i];
+//             for (var j = i-gap; j >= 0 && arr[j] > temp; j-=gap) {
+//                 arr[j+gap] = arr[j];
+//             }
+//             arr[j+gap] = temp;
+//         }
+//     }
+//     return arr;
+// }
+
+// var arr = shellSort([5,7,2,4,8,9,1])
+// console.log(arr)
+// </script>
 </head>
 <body>
-
+<!-- 
 <p>请把 W3School 的图片拖放到矩形中：</p>
 
 <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 <br />
-<img id="drag1" src="/i/eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" />
+<img id="drag1" src="/i/eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" /> -->
+<div id="root"></div>
 
+<script>
+function randomHexColor(){
+    return "#" + ("0000"+ (Math.random() * 0x1000000 << 0).toString(16)).substr(-6);
+}
+function show() {
+    var k = 0;
+    var root = document.getElementById("root");
+    for(var i = 0; i < 10000; i++){
+        k += new Date - 0 ;
+        var el = document.createElement("div");
+        el.innerHTML = k;
+        root.appendChild(el);
+        el.style.cssText = `background:${randomHexColor()};height:40px`;
+    }
+}
+show()
+</script>
 </body>
 </html>
