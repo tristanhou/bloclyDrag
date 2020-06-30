@@ -67,12 +67,12 @@ module.exports = {
 	}, 
 	devServer: {
 		contentBase: path.join(__dirname, './dist'), //网站的根目录为 根目录/dist，如果配置不对，会报Cannot GET /错误
-		port: 8080, // 端口改为 8080
+		port: 8089, // 端口改为 8080
 		open: true, // 自动打开浏览器，适合懒人
 		proxy: {
 			'/proxy/*': {
 				// target: 'http://39.106.185.13:3000',
-				target: 'http://192.168.154.1:3000',
+				target: 'http://10.0.16.241:3000',
 				changeOrigin: true,
 				pathRewrite: {
 					'^/proxy': ''

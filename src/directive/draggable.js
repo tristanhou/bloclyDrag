@@ -4,7 +4,6 @@ import { on } from '@/libs/untils.js'
  */
 export default {
 	inserted: (el, binding, vnode) => {
-		debugger
 		let triggerDom = document.querySelector(binding.value.trigger)
 		triggerDom.style.cursor = 'move'
 		let bodyDom = document.querySelector(binding.value.body)
@@ -30,10 +29,8 @@ export default {
 			bodyDom.style.left = Math.min(Math.max(e.pageX - boundingClientRect.x - halfWidth, 0), boundingClientRect.width - parseInt(bodyDom.clientWidth)) + 'px'
 			bodyDom.style.right = 0 + 'px'
 		}
-	
 		pageX = bodyDom.style.top
 		pageY = bodyDom.style.left
-		
   	}
 	const handleMouseup = e => {
 		that.context.left = pageX
